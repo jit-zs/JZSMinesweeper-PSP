@@ -52,8 +52,6 @@ function MainMenu:draw()
     end
     UI.DrawSelectedBox(0 + menuOffset.x, ((self.mainIndex - 1) * 16) + menuOffset.y)
     screen.print(300, 0, tostring(os.totalram() - os.ram()))
-    screen.print(300, 30, _VERSION)
-    Minefield.DrawMineSelector(100, 100)
     screen.flip()
 end
 

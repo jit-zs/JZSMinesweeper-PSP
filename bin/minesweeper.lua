@@ -61,7 +61,7 @@ local function checkNeigboringUnveiled(px, py)
     return false
 end
 local function revealAdjacent(px, py)
-    if not math.inarrbounds(gridDimensions.x, px) or not math.inarrbounds(gridDimensions.y, py) or mines[px][py].veiled == false then return end
+    if not math.inarrbounds(gridDimensions.x, px) or not math.inarrbounds(gridDimensions.y, py) or mines[px][py].veiled == false or mines[px][py].flagged then return end
     mines[px][py].veiled = false
     local bombCount = surroundingBombs(px, py)
     screen.print(0, 0, tostring(bombCount))
@@ -84,7 +84,7 @@ local function init(clickPos)
         for j = 1, gridDimensions.y do
             table.insert(mines[i], Node.new())
         end
-        for j = 1, 3 do mines[i][j].bomb = true ; mineCount += 1 end
+        for j = 1, 2 do mines[i][j].bomb = true ; mineCount += 1 end
         table.randomizearray(mines[i])
     end
 end
@@ -181,7 +181,7 @@ function Minesweeper:draw()
     screen.print(300, 0, "start: restart", .5)
     screen.print(375, 0, "select: main menu", .5)
     screen.print(220, 0, tostring(elapsedTime))
-    screen.print(256, 0,"FPS: " .. tostring(screen.fps()))
+    screen.print(200, 256,"FPS: " .. tostring(screen.fps()))
     screen.flip()
 end
 
